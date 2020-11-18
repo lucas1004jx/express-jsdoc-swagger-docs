@@ -1,20 +1,20 @@
-- Getting started
+- 如何使用
 
-  - [Introduction](/zh/README.md)
-  - [Configuration](/zh/configuration.md?id=configuration)
-    - [Options](/zh/configuration.md?id=configuration)
-    - [Example](/zh/configuration.md?id=full-example)
-  - [Schemas / Components](/zh/components.md)
-  - [Endpoints](/zh/responses.md)
-    - [Responses](/zh/responses.md)
-    - [Request body](/zh/requestBody.md)
-    - [Parameters](/zh/parameters.md)
-    - [Examples](/zh/examples.md)
-    - [Tags](/zh/tags.md)
-  - [Security](/zh/security.md)
+  - [简介](/zh/README.md)
+  - [配置](/zh/configuration.md?id=configuration)
+    - [选项](/zh/configuration.md?id=configuration)
+    - [实例](/zh/configuration.md?id=full-example)
+  - [模式 / 组件](/zh/components.md)
+  - [接口](/zh/responses.md)
+    - [网络回复](/zh/responses.md)
+    - [网络请求](/zh/requestBody.md)
+    - [参数](/zh/parameters.md)
+    - [实例](/zh/examples.md)
+    - [标签](/zh/tags.md)
+  - [安全](/zh/security.md)
 
-- Advanced usage
+- 更多用法
 
-  - [Extend your swagger file](/zh/merge.md)
-  - [Event emitter](/zh/eventEmitter.md)
-  - [Combine schemas](/zh/combineSchemas.md)
+  - [延展 swagger 文件](/zh/merge.md)
+  - [事件发送器](/zh/eventEmitter.md)
+  - [复合模式](/zh/combineSchemas.md)
