@@ -1,14 +1,14 @@
-# Event emitter
+# 事件发生器
 
-We expose an [event emitter](https://nodejs.org/api/events.html) in case you want to know more about what is happening while we parse the comments or the Swagger object result.
+我们提供 [事件发生器](https://nodejs.org/api/events.html) 以便用户我们是如何解析注释和swagger 对象的。
 
-These are the events we expose:
+用户可以监听以下的事件:
 
-- **error** you can subscribe to this event to debug if there is a problem while the parsing process is running.
-- **process** you can subscribe to this event to debug how jsdoc comments are being parsed into swagger object per entity.
-- **finish** you can subscribe to receive the result of the swagger object generated.
+- **error** 在程序解析过程中，你可以监听该事件来调试程序。
+- **process** 你可以监听该事件来查看jsdoc注释是如何解析成swagger对象的。
+- **finish** 你可以监听该事件来查看swagger对象生成的结果。
 
-## Example
+## 实例
 
 ```javascript
   
@@ -51,5 +51,5 @@ listener.on('finish', swaggerObject => {
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
 ````
 
-> You can check out more examples [here](https://github.com/BRIKEV/express-jsdoc-swagger/blob/master/examples/eventEmitter).
+> 在[这里](https://github.com/BRIKEV/express-jsdoc-swagger/blob/master/examples/eventEmitter)你可以查看更多的例子
 
