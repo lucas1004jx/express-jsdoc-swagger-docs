@@ -1,7 +1,8 @@
-# Examples
-To add [examples](https://swagger.io/docs/specification/adding-examples/) to your endpoints with [express-jsdoc-swagger](https://github.com/BRIKEV/express-jsdoc-swagger), you can use the `@example` annotation.
+# 实例
 
-The following example illustrates how it can be used to add examples on how the request body must be, as well as what the endpoint is supposed to return for specific status codes.
+你可以使用`@example`标识符，并参考[swagger 文档](https://github.com/BRIKEV/express-jsdoc-swagger)为你的接口添加[例子](https://swagger.io/docs/specification/adding-examples/)。
+
+以下的例子很清楚的描述了网络请求主体的信息，以及接口会返回怎样的状态。
 
 ```javascript
 /**
@@ -31,26 +32,28 @@ The following example illustrates how it can be used to add examples on how the 
  *   "errCode": "EV121"
  * }
  */
-app.post('/api/v1/song', (req, res) => res.send({
-  message: 'You have added a song!',
-}));
+app.post("/api/v1/song", (req, res) =>
+  res.send({
+    message: "You have added a song!",
+  })
+);
 ```
 
-The result in Swagger UI will look like this:
+这个例子在 Swagger 界面中看起来会像这样：
 
 <img src="./assets/examples.png"/>
 
-> You can find more working examples [here](https://github.com/BRIKEV/express-jsdoc-swagger/blob/master/examples/requestBody/withExamples.js) or [here](https://github.com/BRIKEV/express-jsdoc-swagger/blob/master/examples/responses/withExamples.js).
+> 在[这里](https://github.com/BRIKEV/express-jsdoc-swagger/blob/master/examples/requestBody/withExamples.js)或者[这里](https://github.com/BRIKEV/express-jsdoc-swagger/blob/master/examples/responses/withExamples.js)你可以查看更多的例子。
 
-## Usage instructions
+## 使用说明
 
-The `@example` annotation must be immediatly be followed by a keyword that will represent what our example will be illustrating: `request` or `response`.
+`@example` 标记符后必须紧跟一个与该例子相关的关键词，例如“网络请求”或者“网络回复”。
 
-> It's possible to add as many examples as required for both requests and responses in a single endpoint, there's no limit on that. In the case of responses, multiple examples for the same status code are also supported (so we can provide different examples of what our API will return if it succeeds, for example).
+> 不管是“网络请求”或者“网络回复”，你可以无限地添加例子，没有数量限制。如果是“网络回复”的例子，你也可以同时为同一个状态代码添加不同的例子。例如，我们可以为 API 成功返回后的数据添加不同的例子。
 
-The sections below describe in more in detail the expected syntax for the `@example` tag in each case (request and responses). Although it's same for the most part, it will differ slightly depending on the keyword used.
+接下来的例子将会更详细的解释在各种不同的情况下（网络请求和网络回复）如何使用`@example`标识符。虽然大多数情况下都用法都差不多，但是根据关键词的不同，还是会有稍许的差异。
 
-### Request body example
+### 网络请求主体实例
 
 ```
 @example request - [summary]
@@ -58,11 +61,12 @@ The sections below describe in more in detail the expected syntax for the `@exam
 ```
 
 | Field | Description |
-| --- | --- |
-| Summary | Small text that briefly describes the example. This text must occupy a single line. Everything outside of the `@example` tag line will be considered part of the example content and *NOT* the summary. |
-| Content | Example content for the request body. It's imperative that its contents start at a new line below the `@example` tag, and not in the same one. The content can be split into multiple lines if necessary, for better readibility. Indentation and breaklines will be preserved in Swagger UI. |
+| --- | --- |                                                                     
+| 概述  | 用简短的语句对例子做描述。所有的描述语句只能跟`@example`在同一行，换行后的部分将会归为主体内容部分。 |
 
-> You can check out more examples [here](https://github.com/BRIKEV/express-jsdoc-swagger/blob/master/examples/requestBody/withExamples.js).
+| 主体内容 | 网络请求主体的主体内容实例。这部分内容不能与`@example`在同一行。必须写在`@example`的下一行。为了增加可读性，内容部分可以由多行组成。所有的断行，字间距都会在 Swagger UI 里表现出来。|
+
+> 在[这里](https://github.com/BRIKEV/express-jsdoc-swagger/blob/master/examples/requestBody/withExamples.js)你可以查看更多的例子。
 
 ### Response body example
 
@@ -73,8 +77,8 @@ The sections below describe in more in detail the expected syntax for the `@exam
 
 | Field | Description |
 | --- | --- |
-| Status code | An HTTP status code (ex.: `200`). Keep in mind that any code not available in [validStatusCodes](https://github.com/BRIKEV/express-jsdoc-swagger/blob/master/transforms/paths/validStatusCodes.js) will be ignored. Also, it's necessary for a `@return` tag to exist for that same code in order for the example to appear in Swagger UI. |
-| Summary | Small text that briefly describes the example. This text must occupy a single line. Everything outside of the `@example` tag line will be considered part of the example content and *NOT* the summary. |
-| Content | Example content for the response body. It's imperative that its contents start at a new line below the `@example` tag, and not in the same one. The content can be split into multiple lines if necessary, for better readibility. Indentation and breaklines will be preserved in Swagger UI. |
+| 状态代码 | HTTP 转台代码 (例如: `200`). 请注意，只有在 [validStatusCodes](https://github.com/BRIKEV/express-jsdoc-swagger/blob/master/transforms/paths/validStatusCodes.js) 的代码才有有效. 同时, 必须要由 `@return` 标签，你的例子才会出现在 Swagger 的 UI 中。|
+| 概述 | 用简短的语句对例子做描述。所有的描述语句只能跟`@example`在同一行，换行后的部分将会归为主体内容部分。 |
+| Content | 网络回复主体的主体内容实例。这部分内容不能与`@example`在同一行。必须写在`@example`的下一行。为了增加可读性，内容部分可以由多行组成。所有的断行，字间距都会在 Swagger UI 里表现出来。 |
 
-> You can check out more examples [here](https://github.com/BRIKEV/express-jsdoc-swagger/blob/master/examples/responses/withExamples.js).
+> 在[这里](https://github.com/BRIKEV/express-jsdoc-swagger/blob/master/examples/responses/withExamples.js)你可以查看更多的例子。
