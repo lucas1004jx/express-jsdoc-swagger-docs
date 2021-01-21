@@ -56,29 +56,29 @@ app.post("/api/v1/song", (req, res) =>
 ### 网络请求主体实例
 
 ```
-@example request - [summary]
-[content]
+@example 网络请求 - [概述]
+[主体内容]
 ```
 
-| Field | Description |
+| 类别 | 描述 |
 | --- | --- |                                                                     
-| 概述  | 用简短的语句对例子做描述。所有的描述语句只能跟`@example`在同一行，换行后的部分将会归为主体内容部分。 |
+| 概述 | 用简短的语句对例子做描述。所有的描述语句只能跟`@example`在同一行，换行后的部分将会归为主体内容部分。 |
 
 | 主体内容 | 网络请求主体的主体内容实例。这部分内容不能与`@example`在同一行。必须写在`@example`的下一行。为了增加可读性，内容部分可以由多行组成。所有的断行，字间距都会在 Swagger UI 里表现出来。|
 
 > 在[这里](https://github.com/BRIKEV/express-jsdoc-swagger/blob/master/examples/requestBody/withExamples.js)你可以查看更多的例子。
 
-### Response body example
+### 网络回复主体实例
 
 ```
-@example response - [status code] - [summary]
-[content]
+@example response - [状态代码] - [概述]
+[主体内容]
 ```
 
-| Field | Description |
+| 类别 | 描述 |
 | --- | --- |
 | 状态代码 | HTTP 转台代码 (例如: `200`). 请注意，只有在 [validStatusCodes](https://github.com/BRIKEV/express-jsdoc-swagger/blob/master/transforms/paths/validStatusCodes.js) 的代码才有有效. 同时, 必须要由 `@return` 标签，你的例子才会出现在 Swagger 的 UI 中。|
 | 概述 | 用简短的语句对例子做描述。所有的描述语句只能跟`@example`在同一行，换行后的部分将会归为主体内容部分。 |
-| Content | 网络回复主体的主体内容实例。这部分内容不能与`@example`在同一行。必须写在`@example`的下一行。为了增加可读性，内容部分可以由多行组成。所有的断行，字间距都会在 Swagger UI 里表现出来。 |
+| 主体内容 | 网络回复主体的主体内容实例。这部分内容不能与`@example`在同一行。必须写在`@example`的下一行。为了增加可读性，内容部分可以由多行组成。所有的断行，字间距都会在 Swagger UI 里表现出来。 |
 
 > 在[这里](https://github.com/BRIKEV/express-jsdoc-swagger/blob/master/examples/responses/withExamples.js)你可以查看更多的例子。
