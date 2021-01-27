@@ -1,10 +1,12 @@
-# Extend your swagger file
+# 扩展 swagger 文件
 
-This option is useful if you have an old project, and you only want to add comments on new endpoints, or you want to add new features that we don't support.
+如果你有项目已经使用了 swagger，你可以在 swagger 文件的基础上添加新的接口，或者添加一些我们不支持的新特性。
 
-## Example
-You could have one `swagger.json` already defined like this one:
-<details><summary>Click to expand</summary>
+## 实例
+
+你应该会有一个像这样的 `swagger.json` 文件:
+
+<details><summary>点击看更多</summary>
 
 ```js
 {
@@ -204,54 +206,59 @@ You could have one `swagger.json` already defined like this one:
   }
 }
 ```
+
 </details>
 
-Which renders the next SwaggerUI:
+你的 SwaggerUI 会看起来像下图这样 I:
 
 <img src="./assets/merge.png"/>
 
-If you want to *integrate* your API written with `jsdoc` comments and your `swagger.json`, you can check out this example:
+如果你想*整合*你的 `jsdoc`API 和`swagger.json`文件, 你可以参考下面的例子:
 
 ```javascript
-const express = require('express');
-const oldSwagger = require('./swagger.json'); // This file contains the previously mentioned swagger.json
-const expressJSDocSwagger = require('express-jsdoc-swagger');
+const express = require("express");
+const oldSwagger = require("./swagger.json"); //这是你之前的swagger.json文件
+const expressJSDocSwagger = require("express-jsdoc-swagger");
 
 const options = {
-  info: { // version and title are required
-    version: '1.0.0',
-    title: 'Albums store',
+  info: {
+    // 版本和标题是必须的
+    version: "1.0.0",
+    title: "Albums store",
   },
-  filesPattern: './simple.js',
+  filesPattern: "./simple.js",
   baseDir: __dirname,
 };
 
 const app = express();
 const port = 3001;
 
-// To merge swagger.json we had with the new endpoints, It will be passed as a second parameter:
+// 第二个参数是之前的swagger.json文件:
 expressJSDocSwagger(app)(options, oldSwagger);
 
-// Example of new endpoint:
+// 新增接口例子:
 /**
  * GET /api/v1/albums
- * @summary This is the summary or description of the endpoint
- * @tags Album
- * @param {array<object>} name.query.required - name param description
- * @return {array<object>} 200 - success response - application/json
+ * @summary 对接口的概述
+ * @tags 相册
+ * @param {array<object>} name.query.required - 名字参数描述
+ * @return {array<object>} 200 - 成功回复 - application/json
  */
-app.get('/api/v1/albums', (req, res) => (
-  res.json([{
-    title: 'abum 1',
-  }])
-));
+app.get("/api/v1/albums", (req, res) =>
+  res.json([
+    {
+      title: "abum 1",
+    },
+  ])
+);
 
-app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
-
+app.listen(port, () =>
+  console.log(`Example app listening at http://localhost:${port}`)
+);
 ```
 
-Finally, the result in the SwaggerUI will be the following:
+最终, SwaggerUI 会像下图所示:
 
 <img src="./assets/merge-result.png"/>
 
-> You can check out more examples [here](https://github.com/BRIKEV/express-jsdoc-swagger/tree/master/examples/merge).
+> 在[这里](https://github.com/BRIKEV/express-jsdoc-swagger/tree/master/examples/merge)你可以参考更多的例子
