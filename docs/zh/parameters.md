@@ -1,42 +1,44 @@
-# Parameters
-To add [parameters](https://swagger.io/docs/specification/describing-parameters/) to your endpoints with express-jsdoc-swagger, you could add these comments:
+# 参数
+
+你可以使用以下的注解，通过 express-jsdoc-swagger，为你的服务端点添加[参数](https://swagger.io/docs/specification/describing-parameters/):
 
 ```javascript
 /**
  * GET /api/v1/{id}
- * @summary This is the summary or description of the endpoint
- * @param {string} name.query.required - name param description
- * @param {number} id.path - phone number
- * @return {string} 200 - success response
+ * @summary 这是服务端点的概述
+ * @param {string} name.query.required - 参数的描述
+ * @param {number} id.path - 电话号码
+ * @return {string} 200 - 回复成功
  */
-app.get('/api/v1/:id', (req, res) => res.send('Hello World!'));
-````
+app.get("/api/v1/:id", (req, res) => res.send("Hello World!"));
+```
 
-Where:
-- `@param` is used to define one parameter.
-- [Type](https://swagger.io/specification/#data-types) is defined between `{}`.
-- After the type, you have to define the key you want for the parameter.
-- You can define the status of your param like this:
-  - `* @param {string} name.query.required` name will be a required query param.
-  - `* @param {string} name.query.deprecated` name will be a deprecated query param.
-  - `* @param {string} name.query` name will be a query param.
-- The following option, separated between ` - `, is the description.
+注解:
 
-You can add **enum values** to your parameters like this:
+- `@param` 用于定义参数.
+- [类型](https://swagger.io/specification/#data-types) 需要定义在 `{}`之间.
+- 在定义类型之后, 你需要定义参数的名字。
+- 具体如下:
+  - `* @param {string} name.query.required` 这是个必须参数.
+  - `* @param {string} name.query.deprecated` 表明该参数已不再使用
+  - `* @param {string} name.query` 单纯的定义参数名字
+- 在 `-`之后可以对参数做简短的描述.
+
+你可以在参数后添加 **enum values**:
 
 ```javascript
 /**
  * GET /api/v1/albums
- * @summary This is the summary or description of the endpoint
- * @param {string} name.query.required - name param description - enum:type1,type2
- * @param {string} license.query - enum:MIT,ISC - name param description
- * @return {object} 200 - success response - application/json
+ * @summary 这是服务端点的概述
+ * @param {string} name.query.required - 参数的描述 - enum:type1,type2
+ * @param {string} license.query - enum:MIT,ISC - 参数的描述
+ * @return {object} 200 - 回复成功 - application/json
  */
 ```
 
-The last parameter can be used as an enum, or you can switch between enum and description.
+最后一个参数可以用作枚举参数类型，参数的描述和枚举可以调换位置。
 
-The result in swagger UI will be this:
+swagger UI 界面会像下图所示:
 
 <img src="./assets/parameters.png"/>
 
