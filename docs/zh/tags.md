@@ -1,18 +1,23 @@
-# Tags
-You can assign a list of [tags](https://swagger.io/docs/specification/grouping-operations-with-tags/) to each API operation.
+# 标签
 
-To define a tag with express-jsdoc-swagger:
+你可以为每个网络端点定义一系列的[标签](https://swagger.io/docs/specification/grouping-operations-with-tags/)。
+
+通过 express-jsdoc-swagger 来定义标签:
+
 ```javascript
 /**
  * GET /api/v1/album
  * @tags Album - everything about album
  */
 ```
-Where:
-- The keyword `@tags` is used to assign to the endpoint.
-- The following option, separated between ` - `, is the description.
 
-Furthermore, the same tag can be assigned to several endpoints:
+注解:
+
+- 关键字 `@tags` 用于标注网络端点。
+- 被`-`隔开的部分是描述性语句。
+
+此外, 同一个标签可以同时为几个不同的网络端点做标注:
+
 ```javascript
 /**
  * GET /api/v1/songs
@@ -20,9 +25,9 @@ Furthermore, the same tag can be assigned to several endpoints:
  * @tags Songs - everything about songs
  */
 ```
-In this case, `Album` and `Song` tags have been assigned to the songs' endpoint, and the result in swagger UI will be this:
+
+在上例中, `Album` 和 `Song` 标签同时标注了同一个网络端点, swagger UI 界面会像下图所示:
 
 <img src="./assets/tags.png"/>
 
-> You can check out more examples [here](https://github.com/BRIKEV/express-jsdoc-swagger/tree/master/examples/tags).
-
+> 在[这里](https://github.com/BRIKEV/express-jsdoc-swagger/tree/master/examples/tags)你可以参考更多的实例。
