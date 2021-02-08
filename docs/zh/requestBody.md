@@ -1,22 +1,24 @@
-# Request body
-To add a [body payload](https://swagger.io/docs/specification/describing-request-body/) to your endpoints with express-jsdoc-swagger, you could add these comments:
+# 网络请求主体
+
+如果你需要使用 express-jsdoc-swagger 为网络端点添加[请求主体](https://swagger.io/docs/specification/describing-request-body/) 你可以添加以下的注释:
 
 ```javascript
 /**
  * POST /api/v1/album
  * @param {object} request.body.required - songs info - application/json
  */
-app.post('/api/v1/album', (req, res) => res.send('You save a song!'));
+app.post("/api/v1/album", (req, res) => res.send("你成功保存了一首歌！"));
 ```
 
-Where:
-- `@param` is used to define one parameter.
-- [Type](https://swagger.io/specification/#data-types) is defined between `{}`.
-- After the type, you have to define the key **request.body**. This key must have that value if you want this as a body payload.
-- The following option, separated between ` - `, is the description.
-- The last option of the keyword `@param` *(application/json)* specify the request media type. This is optional and its default value is *application/json*.
+注解:
 
-You can mix this with [components](components.md) to define a payload based on a component like in this example:
+- `@param` 用来定义一个参数。
+- [数据类型](https://swagger.io/specification/#data-types) 定义在 `{}`之间.
+- 在数据类型之后, 你可以用关键字 **request.body**来表示这是一个网络请求主体。
+- 在 `-`之间的部分是对参数的概述。
+- 参数 `@param`的最后一部分 _(application/json)_ 用来阐明请求的类型。这部分不是必须的，默认值是 _application/json_。
+
+你可以与 [组件](components.md) 结合，来写出相关的请求主体，如下列所示:
 
 ```javascript
 /**
@@ -32,17 +34,17 @@ You can mix this with [components](components.md) to define a payload based on a
  * @param {Song} request.body.required - song info
  * @return {object} 200 - song response
  */
-app.post('/api/v1/songs', (req, res) => res.send('You save a song!'));
+app.post("/api/v1/songs", (req, res) => res.send("你成功保存了一首歌！"));
 
 /**
  * POST /api/v1/album
  * @param {array<Song>} request.body.required - songs info
  * @return {object} 200 - album response
  */
-app.post('/api/v1/album', (req, res) => res.send('You save a song!'));
-````
+app.post("/api/v1/album", (req, res) => res.send("你成功保存了一首歌！"));
+```
 
-Or you can add form-data requests to upload files:
+或者你可以添加数据表格类型来上传文件:
 
 ```javascript
 /**
@@ -59,24 +61,24 @@ Or you can add form-data requests to upload files:
  * @param {Song} request.body.required - songs info - multipart/form-data
  * @return {object} 200 - Album created
  */
-app.post('/api/v1/album', (req, res) => res.send('You save a song!'));
+app.post("/api/v1/album", (req, res) => res.send("你成功保存了一首歌！"));
 ```
 
-In that example, we use the last option of the keyword `@param` to specify the request media type as multipart/form-data.
+在上例中, 在 `@param`的最后一部分，我们使用 multipart/form-data 来定义请求主体的类型。
 
-The result in swagger UI will be this:
+swagger UI 界面会像下图所示:
 
 <img src="./assets/request-body.png"/>
 
-> To learn how to add examples of your endpoint's payload, check out the [examples](examples.md) section.
+> 请参考[实例](examples.md) 来了解更多如何添加网络请求主体。
 
-> To learn how define components schemas, please visit [components](components.md) section.
+> 请参考[组件](components.md)来了解更多如何定义组件.
 
-> You can check out more examples [here](https://github.com/BRIKEV/express-jsdoc-swagger/tree/master/examples/requestBody).
+> 在[这里](https://github.com/BRIKEV/express-jsdoc-swagger/tree/master/examples/requestBody)你可以参考更多的例子。
 
-### Body as form parameter
+### 请求主体作为表格参数
 
-You can send some body parameters without using a component. To do that you could add these comments:
+你可以不通过组件来传递参数，参考以下例子:
 
 ```javascript
 /**
@@ -85,16 +87,17 @@ You can send some body parameters without using a component. To do that you coul
  * @param {string} title.form.required - This is the song title - application/x-www-form-urlencoded
  * @return {object} 200 - song response
  */
-app.post('/api/v1/songs', (req, res) => res.json({}));
+app.post("/api/v1/songs", (req, res) => res.json({}));
 ```
 
-Where:
-- `@param` is used to define one parameter.
-- [Type](https://swagger.io/specification/#data-types) is defined between `{}`.
-- After the type, you have to define the key you want for the parameter followed by **form** value.
-- The following option, separated between ` - `, is the description.
-- The last option of the keyword `@param` *(application/json)* specify the request media type. This is optional and its default value is *application/json*.
+注解:
 
-**IMPORTANT:** To use form params it is neccesary to provide a description for each field
+- `@param` 用来定义一个参数。
+- [数据类型](https://swagger.io/specification/#data-types) 定义在 `{}`之间.
+- 在数据类型之后, 你可以在**form**之后定义参数关键字。
+- 在 `-`之间的部分是对参数的概述。
+- 参数 `@param`的最后一部分 _(application/json)_ 用来阐明请求的类型。这部分不是必须的，默认值是 _application/json_。
 
-> You can check out more examples [here](https://github.com/BRIKEV/express-jsdoc-swagger/blob/master/examples/requestBody/formParameters.js).
+**注意:** 如果使用表格参数，需要为每一项提供概述
+
+> 在[这里](https://github.com/BRIKEV/express-jsdoc-swagger/blob/master/examples/requestBody/formParameters.js)你可以参考更多的例子。
