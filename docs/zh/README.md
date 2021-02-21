@@ -1,46 +1,50 @@
 ![npm](https://img.shields.io/npm/v/express-jsdoc-swagger)
-![Node.js Package](https://github.com/BRIKEV/express-jsdoc-swagger/workflows/Build/badge.svg)
-[![Known Vulnerabilities](https://snyk.io/test/github/BRIKEV/express-jsdoc-swagger/badge.svg)](https://snyk.io/test/github/BRIKEV/express-jsdoc-swagger)
-[![Maintainability](https://api.codeclimate.com/v1/badges/6d5565df0c9c10e75b59/maintainability)](https://codeclimate.com/github/BRIKEV/express-jsdoc-swagger/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/6d5565df0c9c10e75b59/test_coverage)](https://codeclimate.com/github/BRIKEV/express-jsdoc-swagger/test_coverage)
-![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
+![Node.js包](https://github.com/BRIKEV/express-jsdoc-swagger/workflows/Build/badge.svg)
+[![已知漏洞](https://snyk.io/test/github/BRIKEV/express-jsdoc-swagger/badge.svg)](https://snyk.io/test/github/BRIKEV/express-jsdoc-swagger)
+[![维护](https://api.codeclimate.com/v1/badges/6d5565df0c9c10e75b59/maintainability)](https://codeclimate.com/github/BRIKEV/express-jsdoc-swagger/maintainability)
+[![测试覆盖](https://api.codeclimate.com/v1/badges/6d5565df0c9c10e75b59/test_coverage)](https://codeclimate.com/github/BRIKEV/express-jsdoc-swagger/test_coverage)
+![许可: MIT](https://img.shields.io/badge/License-MIT-green.svg)
 ![npm](https://img.shields.io/npm/dm/express-jsdoc-swagger)
 
 # express-jsdoc-swagger
 
-With this library, you can document your express endpoints using swagger [OpenAPI 3 Specification](https://swagger.io/specification/) without writing YAML or JSON. You can write jsdoc comments on each endpoint, and the library is going to create the swagger UI.
+使用该库，你可以直接使用 swagger [OpenAPI 3 Specification](https://swagger.io/specification/)来记录你的服务端接口， 而不必使用 YAML 或者 JSON。你可以为每个接口添加 jsdoc 注释， swagger UI 界面将会自动生成。
 
-## Prerequisites
-This library assumes you are using:
+## 使用条件
+
+使用条件:
+
 1. [NodeJS](https://nodejs.org)
 2. [Express.js](http://www.expressjs.com)
 
-## Installation
+## 如何安装
+
 ```
 npm i express-jsdoc-swagger
 ```
 
-## Usage
+## 使用方法
+
 ```javascript
-const express = require('express');
-const expressJSDocSwagger = require('express-jsdoc-swagger');
+const express = require("express");
+const expressJSDocSwagger = require("express-jsdoc-swagger");
 
 const options = {
   info: {
-    version: '1.0.0',
-    title: 'Albums store',
+    version: "1.0.0",
+    title: "Albums store",
     license: {
-      name: 'MIT',
+      name: "MIT",
     },
   },
   security: {
     BasicAuth: {
-      type: 'http',
-      scheme: 'basic',
+      type: "http",
+      scheme: "basic",
     },
   },
-  filesPattern: './**/*.js', // Glob pattern to find your jsdoc files
-  swaggerUIPath: '/your-url', // SwaggerUI will be render in this url. Default: '/api-docs'
+  filesPattern: "./**/*.js", // 找到所有jsdoc文件
+  swaggerUIPath: "/your-url", // 定义SwaggerUI界面所在的URL。默认为: '/api-docs'
   baseDir: __dirname,
 };
 
@@ -51,91 +55,102 @@ expressJSDocSwagger(app)(options);
 
 /**
  * GET /api/v1
- * @summary This is the summary or description of the endpoint
- * @return {object} 200 - success response
+ * @summary 端点的概述
+ * @return {object} 200 - 成功回复
  */
-app.get('/api/v1', (req, res) => res.json({
-  success: true,
-}));
+app.get("/api/v1", (req, res) =>
+  res.json({
+    success: true,
+  })
+);
 
-app.listen(PORT, () => console.log(`Example app listening at http://localhost:${PORT}`));
-
+app.listen(PORT, () =>
+  console.log(`Example app listening at http://localhost:${PORT}`)
+);
 ```
 
-## Examples
-1. Basic configuration
+## 实例
+
+1. 基础设置
+
 ```javascript
 const options = {
   info: {
-    version: '1.0.0',
-    title: 'Albums store',
+    version: "1.0.0",
+    title: "Albums store",
     license: {
-      name: 'MIT',
+      name: "MIT",
     },
   },
   security: {
     BasicAuth: {
-      type: 'http',
-      scheme: 'basic',
+      type: "http",
+      scheme: "basic",
     },
   },
-  filesPattern: './**/*.js', // Glob pattern to find your jsdoc files
+  filesPattern: "./**/*.js", // 找到所有的jsdoc文件
   baseDir: __dirname,
 };
 ```
 
-2. Components definition
+2. 定义组件
+
 ```javascript
 /**
- * A song type
+ * 歌曲类型
  * @typedef {object} Song
- * @property {string} title.required - The title
- * @property {string} artist - The artist
- * @property {number} year - The year - double
+ * @property {string} title.required - 标题
+ * @property {string} artist - 艺术家
+ * @property {number} year - 年份 - double
  */
 ```
 
-3. Endpoint that returns a `Songs` model array
+3. 一个返回`歌曲类型`的数组的端点
+
 ```javascript
 /**
  * GET /api/v1/albums
- * @summary This is the summary or description of the endpoint
- * @tags album
- * @return {array<Song>} 200 - success response - application/json
+ * @summary 端点的概述
+ * @tags 专辑
+ * @return {array<Song>} 200 - 回复成功 - application/json
  */
-app.get('/api/v1/albums', (req, res) => (
-  res.json([{
-    title: 'abum 1',
-  }])
-));
+app.get("/api/v1/albums", (req, res) =>
+  res.json([
+    {
+      title: "abum 1",
+    },
+  ])
+);
 ```
 
-4. Basic endpoint definition with tags, params and basic authentication
+4. 端点的标签，参数和认证的基本定义方法
+
 ```javascript
 /**
  * GET /api/v1/album
- * @summary This is the summary or description of the endpoint
+ * @summary 端点的概述
  * @security BasicAuth
- * @tags album
- * @param {string} name.query.required - name param description
- * @return {object} 200 - success response - application/json
- * @return {object} 400 - Bad request response
+ * @tags 专辑
+ * @param {string} name.query.required - 名字参数描述
+ * @return {object} 200 - 回复成功 - application/json
+ * @return {object} 400 - 回复不成功
  */
-app.get('/api/v1/album', (req, res) => (
+app.get("/api/v1/album", (req, res) =>
   res.json({
-    title: 'abum 1',
+    title: "abum 1",
   })
-));
+);
 ```
 
-5. Basic endpoint definition with code example for response body
+5. 端点中网络回复主体实例的基本定义方法
+
 ```javascript
 /**
  * GET /api/v1/albums
- * @summary This is the summary or description of the endpoint
- * @tags album
- * @return {array<Song>} 200 - success response - application/json
- * @example response - 200 - success response example
+ * @summary 端点的概述
+ * @tags 专辑
+ * @return {array<Song>} 200 - 回复成功 - application/json
+ * @example response - 200 - 回复成功实例
  * [
  *   {
  *     "title": "Bury the light",
@@ -144,16 +159,18 @@ app.get('/api/v1/album', (req, res) => (
  *   }
  * ]
  */
-app.get('/api/v1/albums', (req, res) => (
-  res.json([{
-    title: 'track 1',
-  }])
-));
+app.get("/api/v1/albums", (req, res) =>
+  res.json([
+    {
+      title: "track 1",
+    },
+  ])
+);
 ```
 
-You can find more examples [here](https://github.com/BRIKEV/express-jsdoc-swagger/tree/master/examples).
+在[这里](https://github.com/BRIKEV/express-jsdoc-swagger/tree/master/examples)你可以参考更多的例子。
 
-## Contributors ✨
+## 贡献者 ✨
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -169,6 +186,7 @@ You can find more examples [here](https://github.com/BRIKEV/express-jsdoc-swagge
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+该项目依据 [所有贡献着](https://github.com/all-contributors/all-contributors)的规定. 欢迎参与我们的项目！
